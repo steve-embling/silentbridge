@@ -3,7 +3,8 @@ import os
 import time
 import json
 import sys
-import netifaces
+#import netifaces
+upstream_mac = "mac:addr"
 
 import core.utils
 import core.firewalls
@@ -11,12 +12,12 @@ import core.analyzer
 import core.injector
 import core.core_config
 import core.cli
-import core.splitters
+#import core.splitters
 
 import settings.paths
 
-from core.hostapd import Hostapd
-from core.cert_manager import cert_manager
+#from core.hostapd import Hostapd
+#from core.cert_manager import cert_manager
 
 def splitter_control(configs, options):
     ''' manual control of A/B splitters '''
@@ -91,7 +92,7 @@ def create_transparent_bridge(configs, options):
     egress_port = options['egress_port']
 
     # dynamically populated
-    upstream_mac = netifaces.ifaddresses(upstream)[netifaces.AF_LINK][0]['addr']
+    #upstream_mac = netifaces.ifaddresses(upstream)[netifaces.AF_LINK][0]['addr']
     bridge = core.utils.bridge.Bridge(bridge_iface, mac=upstream_mac)
 
     print '[*] Making sure br_netfilter kernel module is loaded by running modprobe...'
@@ -156,7 +157,7 @@ def add_interaction(configs, options):
     gw_mac = options['gw_mac']
 
     # dynamically populated
-    upstream_mac = netifaces.ifaddresses(upstream)[netifaces.AF_LINK][0]['addr']
+    #upstream_mac = netifaces.ifaddresses(upstream)[netifaces.AF_LINK][0]['addr']
     bridge = core.utils.bridge.Bridge(bridge_iface)
 
     print '[*] Making sure br_netfilter kernel module is loaded by running modprobe...'
